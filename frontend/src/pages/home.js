@@ -2,12 +2,18 @@ import React from 'react';
 
 const Home = () => {
 	return (
-		<main className=' container mx-auto w-full min-h-full flex flex-col items-center justify-between gap-4 py-5 bg-slate-50'>
-			<section className='w-full h-[40vh] bg-gray-300 bg-hero bg-cover bg-center'>
-				hello
-			</section>
-			<section className='w-full h-[40vh] bg-gray-300 items-center gap-4 flex'>
-				<div className=' flex-1 rounded-lg overflow-hidden bg-slate-50 h-full bg-rent bg-cover bg-center grid place-items-center '>
-					<h3 className='text-3xl text-gray-300'>for rent</h3>
+		<main className=' container mx-auto w-full min-h-full flex flex-col items-center justify-between gap-4 py-5 bg-slate-50 px-9 sm:px-5'>
+			<section className='w-full h-[40vh] bg-gray-300 bg-hero bg-cover bg-center rounded-md'></section>
+			<section className='w-full h-[40vh] bg-slate-100 items-center flex-col sm:flex-row gap-4 flex'>
+				<div className=' sm:flex-1 rounded-lg overflow-hidden w-full bg-slate-50 h-full bg-rent bg-cover bg-center grid place-items-center before:absolute before:bg-black/20 before:inset-0 relative z-10 cursor-pointer'>
+					<h3 className='text-3xl text-gray-300 z-50 '>for rent</h3>
 				</div>
-				<div className=' flex-1 rounded-lg overflow-hidden bg-slate-50 h-full bg-sale object-cover bg-cover bg-
+				<div className=' sm:flex-1 w-full rounded-lg overflow-hidden bg-slate-50 h-full bg-sale object-cover bg-cover bg-center bg-no-repeat grid place-items-center before:absolute before:bg-black/20 before:inset-0 relative z-10 cursor-pointer  '>
+					<h3 className=' text-gray-300 text-3xl z-50 '>for sale</h3>
+				</div>
+			</section>
+		</main>
+	);
+};
+
+export default Home;
