@@ -36,7 +36,7 @@ const NavBar = () => {
 					</span>
 				</NavLink>
 				<NavLink
-					to='/login'
+					to='/profile'
 					className={(navData) =>
 						navData.isActive ? `active:${active}` : ' text-slate-600'
 					}

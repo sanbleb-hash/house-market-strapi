@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
-import Login from '../pages/login';
+import { Navigate, Outlet } from 'react-router-dom';
 
 const Protect = () => {
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	return <div>{isLoggedIn ? <Navigate to='/' /> : <Login />}</div>;
+	const isLoggedIn = false;
+	return <div>{isLoggedIn ? <Outlet /> : <Navigate to='/login' />}</div>;
 };
 
 export default Protect;

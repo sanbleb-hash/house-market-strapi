@@ -1,0 +1,71 @@
+{
+  "kind": "collectionType",
+  "collectionName": "listings",
+  "info": {
+    "singularName": "listing",
+    "pluralName": "listings",
+    "displayName": "listing",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "bedrooms": {
+      "type": "integer",
+      "required": true
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
+    },
+    "bathrooms": {
+      "type": "integer"
+    },
+    "location": {
+      "type": "string",
+      "required": true
+    },
+    "parking": {
+      "type": "enumeration",
+      "enum": [
+        "parking spot",
+        "no parking"
+      ]
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "for rent",
+        "for sale"
+      ]
+    },
+    "fotos": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "listings"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    }
+  }
+}
