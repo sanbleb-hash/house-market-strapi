@@ -1,7 +1,7 @@
 {
 	"name": "house-market-mern",
 	"version": "0.1.0",
-	"proxy": "http://localhost:1337/api",
+	"proxy": "http://localhost:1337",
 	"private": true,
 	"dependencies": {
 		"@tailwindcss/forms": "^0.5.2",
@@ -10,6 +10,7 @@
 		"@testing-library/react": "^13.3.0",
 		"@testing-library/user-event": "^13.5.0",
 		"axios": "^0.27.2",
+		"js-cookie": "^3.0.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-icons": "^4.4.0",

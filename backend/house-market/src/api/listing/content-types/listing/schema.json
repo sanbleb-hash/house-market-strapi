@@ -42,8 +42,8 @@
     "type": {
       "type": "enumeration",
       "enum": [
-        "for rent",
-        "for sale"
+        "rent",
+        "sale"
       ]
     },
     "fotos": {

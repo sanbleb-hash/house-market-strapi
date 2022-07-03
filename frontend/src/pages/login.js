@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
@@ -68,6 +69,7 @@ const Login = () => {
 					dispatch({ type: 'LOGIN_USER', payload: data });
 
 					localStorage.setItem('user', JSON.stringify(data));
+					console.log(data);
 				}
 				setFormData({
 					username: '',
@@ -77,7 +79,7 @@ const Login = () => {
 				});
 			}
 		} catch (error) {
-			dispatch({ type: 'SET_ERROR', payload: error.message });
+			dispatch({ type: 'SET_ERROR', payload: error.message[0].message[0] });
 			toast.error(error);
 		}
 	};
@@ -151,7 +153,7 @@ const Login = () => {
 						isLoading && 'opacity-50 cursor-not-allowed'
 					}`}
 				>
-					{isLoading ? 'loading...' : !isLogin ? 'register' : 'login'}
+					{isLoading ? 'getting ready...' : !isLogin ? 'register' : 'login'}
 				</button>
 			</form>
 			{isError && <div className='text-red-500'>{error}</div>}

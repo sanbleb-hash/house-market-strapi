@@ -9,6 +9,7 @@ import Profile from './pages/profile';
 import Type from './pages/type';
 import { ToastContainer } from 'react-toastify';
 import Login from './pages/login';
+import Create from './pages/create';
 
 const App = () => {
 	return (
@@ -20,9 +21,12 @@ const App = () => {
 					<Route path='/profile' element={<Protect />}>
 						<Route path='/profile' element={<Profile />} />
 					</Route>
+					<Route path='/create' element={<Protect />}>
+						<Route path='/create' element={<Create />} />
+					</Route>
 					<Route path='/login' element={<Login />} />
 					<Route path='/type/:typeId' element={<Type />} />
-					<Route path='/type/:typeId/:listingId' element={<Listing />} />
+					<Route path='/listing/:listingId' element={<Listing />} />
 				</Routes>
 				<ToastContainer />
 			</main>

@@ -4,10 +4,15 @@ import {
 	MdOutlinePersonOutline,
 } from 'react-icons/md';
 
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../utils/authContext';
 
 const NavBar = () => {
+	const { state, dispatch } = useContext(AuthContext);
+	const [showPopup, setShowPopup] = useState(false);
+	const { user } = state;
+
 	const active =
 		' text-slate-800 border-b-2 border-blue-400 pb-3 transition-all duration-100  ';
 	return (
@@ -41,9 +46,24 @@ const NavBar = () => {
 						navData.isActive ? `active:${active}` : ' text-slate-600'
 					}
 				>
-					<span className=' items-center justify-center gap-1 flex'>
-						<MdOutlinePersonOutline size={25} />
-						profile
+					{user && showPopup && (
+						<span
+							className=' items-center justify-center absolute bottom-[8vh] right-[10rem] shadow-lg bg-white px-4 py-2 gap-1 flex'
+							onClick={() => {
+								setShowPopup(false);
+								dispatch({ type: 'LOGOUT_USER' });
+							}}
+						>
+							logout
+						</span>
+					)}
+					<span
+						className=' items-center justify-center  capitalize flex gap-3 relative '
+						onMouseEnter={() => setShowPopup(!showPopup)}
+						onClick={() => setShowPopup(!showPopup)}
+					>
+						{user ? user.username : <MdOutlinePersonOutline size={25} />}
+						<h5>profile</h5>
 					</span>
 				</NavLink>
 			</nav>
