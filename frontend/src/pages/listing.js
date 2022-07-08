@@ -24,13 +24,13 @@ const Listing = () => {
 	}, [listingId]);
 
 	return (
-		<div className='w-full min-h-[90vh] bg-slate-100  pb-10'>
+		<div className='w-full min-h-[90vh] bg-slate-100 pt-20 pb-10'>
 			{isLoading ? (
 				<div className='flex justify-center items-center  animate-spin h-screen'>
 					<RiLoader5Line className='text-5xl text-blue-300' />.
 				</div>
 			) : (
-				<div className='container m-auto h-[60vh] bg-slate-100'>
+				<div className='container mx-auto h-[60vh] px-16 bg-slate-100'>
 					<h1 className=' pt-6 text-gray-600'>{listing.name}</h1>
 					<h3 className=' text-gray-600'> for {listing.type}</h3>
 					<Link to={-1}>

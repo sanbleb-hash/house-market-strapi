@@ -10,11 +10,13 @@ import Type from './pages/type';
 import { ToastContainer } from 'react-toastify';
 import Login from './pages/login';
 import Create from './pages/create';
+import Header from './components/header';
 
 const App = () => {
 	return (
 		<Router>
 			<main className=' prose-base bg-slate-100 min-h-[90vh] w-screen font-semibold'>
+				<Header />
 				<Routes>
 					<Route path='/' element={<Home />} />
 					<Route path='/offers' element={<Offers />} />

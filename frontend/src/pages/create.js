@@ -18,7 +18,7 @@ const Create = () => {
 
 		location: '',
 		bathrooms: '',
-		offer: '',
+		discount: '',
 	});
 	const handleChange = (e) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -51,7 +51,7 @@ const Create = () => {
 			bedrooms: '',
 			location: '',
 			bathrooms: '',
-			offer: '',
+			discount: '',
 		});
 		if (response) {
 			navigate('/');
@@ -68,7 +68,7 @@ const Create = () => {
 		location,
 		bathrooms,
 		bedrooms,
-		offer,
+		discount,
 	} = formData;
 
 	useEffect(() => {
@@ -76,7 +76,7 @@ const Create = () => {
 	}, [user]);
 
 	return (
-		<section className='p-8 min-h-[70vh]'>
+		<section className='p-8 pt-20 min-h-[70vh]'>
 			<h1 className='pl-5 text-gray-500 capitalize '>create your listing</h1>
 			<Link className='pl-7 text-gray-500' to={-1}>
 				<button type='button' className=' hover:text-gray-500 hover:scale-105'>
@@ -135,9 +135,9 @@ const Create = () => {
 							type='number'
 							className='shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 							onChange={handleChange}
-							name='offer'
-							value={offer}
-							placeholder='offer price'
+							name='discount'
+							value={discount}
+							placeholder='discount price'
 						/>
 						<select
 							className='shadow appearance-none border rounded w-[200px] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'

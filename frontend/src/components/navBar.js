@@ -48,7 +48,7 @@ const NavBar = () => {
 				>
 					{user && showPopup && (
 						<span
-							className=' items-center justify-center absolute bottom-[3rem] right-0 shadow-lg bg-white px-4 py-2 gap-1 flex'
+							className=' items-center justify-center absolute bottom-[3rem] right-0 shadow-lg shadow-yellow-700 bg-white px-4 py-2 gap-1 z-50 flex'
 							onClick={() => {
 								setShowPopup(false);
 								dispatch({ type: 'LOGOUT_USER' });

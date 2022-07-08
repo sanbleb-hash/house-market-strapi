@@ -11,9 +11,7 @@ const Type = () => {
 	const { typeId } = useParams();
 	const fetchType = async () => {
 		setIsLoading(true);
-		const listings = await fetch(
-			`http://localhost:1337/api/listings?filters[type][$eq]=${typeId}`
-		);
+		const listings = await fetch(`/api/listings?filters[type][$eq]=${typeId}`);
 		const { data } = await listings.json();
 		setIsLoading(false);
 		setListings(data);
@@ -30,7 +28,7 @@ const Type = () => {
 					<RiLoader5Line className='text-5xl text-blue-300' />
 				</div>
 			) : (
-				<main className='container mx-auto min-height-[80ph] pt-6'>
+				<main className='container mx-auto min-height-[80ph] pt-20 '>
 					<h1
 						className=' text-3xl md:5xl text-gray-600
          '
@@ -46,33 +44,44 @@ const Type = () => {
 							back
 						</button>
 					</Link>
-					<div className=' container sm:w-[70vw] flex  bg-gray-300 min-h-[70vh]   flex-wrap gap-3 overflow-hidden mx-auto p-5'>
+					<div className=' container sm:w-[70vw] flex items-start justify-start bg-gray-300 min-h-[70vh]   flex-wrap gap-3 overflow-hidden px-12 mx-auto p-5'>
 						{listings &&
 							listings.map((listing) => {
 								return (
 									<div
-										className='w-[300px] h-[250px] bg-slate-200 shadow-lg flex mx-auto md:mx-3 md:justify-center items-start overflow-hidden rounded-lg  '
+										className='w-[300px] md:w-[450px] lg:w-[350px] md:h-[150px] h-[250px] bg-slate-200 shadow-lg  shadow-white flex   items-start 
+                              mx-auto 
+                              justify-center overflow-hidden rounded-lg  '
 										key={listing.attributes.id}
 									>
 										<div className='w-1/2 h-full bg-rent'></div>
-										<div className='w-1/2 h-full bg-yellow-100 flex flex-col justify-between px-3 pb-6 '>
-											<h2 className=' text-gray-500 text-xl '>
-												{listing.attributes.name}
-											</h2>
-											<span className=' text-gray-400 text-sm'>
-												{' '}
-												{listing.attributes.bedrooms}{' '}
-												{listing.attributes.bedrooms === 1
-													? 'bedroom'
-													: 'bedrooms'}{' '}
-											</span>
-											<span className=' text-gray-400 text-sm'>
-												{listing.attributes.parking}
+										<div className='w-1/2 h-full my-auto bg-yellow-100 flex flex-col items-center justify-center   p-3  '>
+											<h1 className='text-lg text-gray-500 self-start first-letter:capitalize '>
+												{listing.attributes.name.substring(0, 15)}
+											</h1>
+											<span className='inline-block text-gray-400 leading-4 pb-2'>
+												<h5 className='text-xs self-start first-letter:capitalize '>
+													{listing.attributes.parking}
+												</h5>
+												<h5 className='text-xs self-start first-letter:capitalize '>
+													{listing.attributes.bathrooms}
+													{listing.attributes.bathrooms === 1
+														? ' bathroom'
+														: ' bathrooms'}
+												</h5>
+												<h5 className='text-xs self-start first-letter:capitalize '>
+													{listing.attributes.bedrooms}
+													{listing.attributes.bathrooms === 1
+														? ' bathroom'
+														: ' bathrooms'}
+												</h5>
 											</span>
 											<button
 												type='button'
-												className=' text-gray-600 border border-gray-600 hover:bg-yellow-200 rounded-md
-                                    shadow-lg transition-all duration-200 ease-in-out'
+												className=' text-gray-600 border border-gray-300 hover:bg-yellow-200 rounded-md w-full
+                                    text-sm py-1
+                                    mb-2
+                                    shadow-lg transition-all duration-200  ease-in-out'
 												onClick={() => navigate(`/listing/${listing.id}`)}
 											>
 												see details

@@ -6,9 +6,9 @@ const Home = () => {
 	const navigate = useNavigate();
 
 	return (
-		<main className=' container mx-auto w-full min-h-full flex flex-col items-center justify-between gap-4 py-5 bg-slate-50 px-9 sm:px-5'>
+		<main className=' container mx-auto w-full min-h-full flex pt-20 flex-col items-center justify-between gap-4 py-5 bg-slate-50 px-9 sm:px-5 z-10'>
 			<section className='w-full h-[40vh] bg-gray-300 bg-hero bg-cover bg-center rounded-md'></section>
-			<section className='w-full h-[40vh] bg-slate-100 items-center flex-col sm:flex-row gap-4 flex'>
+			<section className='w-full h-[30vh] bg-slate-100 items-center flex-col sm:flex-row gap-4 flex'>
 				<div
 					className=' sm:flex-1 rounded-lg overflow-hidden w-full bg-slate-50 h-full bg-rent bg-cover bg-center grid place-items-center before:absolute before:bg-black/20 before:inset-0 relative z-10 cursor-pointer'
 					onClick={() => navigate('/type/rent')}
