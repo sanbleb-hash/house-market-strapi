@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import cookie from 'cookie';
+
 import { Link, Navigate } from 'react-router-dom';
 import { AuthContext } from '../utils/authContext';
 
@@ -10,12 +10,13 @@ const Profile = () => {
 
 	useEffect(() => {
 		!user && <Navigate to='/login' />;
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user]);
 	return (
 		<div className='container mx-auto w-full px-6 bg-inherit py-14 '>
 			<h1 className=' text-gray-600  capitalize text-2xl md:text-5xl  py-6'>
-				hie {}
+				hie {user.user.username}
 			</h1>
 			<div className='flex flex-col md:flex-row items-end justify-between mx-auto w-3/4 gap-5'>
 				<form className='w-full  md:w-1/2'>
@@ -28,6 +29,7 @@ const Profile = () => {
 					<input
 						type='text'
 						disabled={!edit}
+						value={user.user.username}
 						className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 						id='username'
 						placeholder='Username'
@@ -42,6 +44,7 @@ const Profile = () => {
 					<input
 						type='text'
 						disabled={!edit}
+						value={user.user.email}
 						className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 						id='username'
 						placeholder='email'
