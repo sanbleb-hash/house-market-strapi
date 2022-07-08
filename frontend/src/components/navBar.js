@@ -43,12 +43,12 @@ const NavBar = () => {
 				<NavLink
 					to='/profile'
 					className={(navData) =>
-						navData.isActive ? `active:${active}` : ' text-slate-600'
+						navData.isActive ? `active:${active}` : ' relative text-slate-600'
 					}
 				>
 					{user && showPopup && (
 						<span
-							className=' items-center justify-center absolute bottom-[8vh] right-[10rem] shadow-lg bg-white px-4 py-2 gap-1 flex'
+							className=' items-center justify-center absolute bottom-[3rem] right-0 shadow-lg bg-white px-4 py-2 gap-1 flex'
 							onClick={() => {
 								setShowPopup(false);
 								dispatch({ type: 'LOGOUT_USER' });
@@ -58,7 +58,7 @@ const NavBar = () => {
 						</span>
 					)}
 					<span
-						className=' items-center justify-center  capitalize flex gap-3 relative '
+						className=' items-center justify-center  capitalize flex gap-3  '
 						onMouseEnter={() => setShowPopup(!showPopup)}
 						onClick={() => setShowPopup(!showPopup)}
 					>

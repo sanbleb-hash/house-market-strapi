@@ -26,7 +26,7 @@ const Listing = () => {
 	return (
 		<div className='w-full min-h-[90vh] bg-slate-100  pb-10'>
 			{isLoading ? (
-				<div className='flex justify-center items-center  animate-spin h-full'>
+				<div className='flex justify-center items-center  animate-spin h-screen'>
 					<RiLoader5Line className='text-5xl text-blue-300' />.
 				</div>
 			) : (
@@ -42,13 +42,13 @@ const Listing = () => {
 							back
 						</button>
 					</Link>
-					<div className='  flex items-start justify-between gap-3 '>
+					<div className='  flex items-start justify-between gap-3 p-4 '>
 						<img
 							src='https://cdn.pixabay.com/photo/2022/01/29/17/12/chateau-6978102__340.jpg'
 							alt=''
 							className=' w-1/2 h-[50vh] shadow-md  '
 						/>
-						<div className='w-1/2 h-[50vh] shadow-md'>
+						<div className='w-1/2 min-h-[50vh] shadow-md p-2 rounded-lg bg-slate-200'>
 							<div className='flex justify-between flex-wrap gap-3'>
 								<span>
 									<p className='text-gray-600'>

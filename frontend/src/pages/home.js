@@ -1,8 +1,10 @@
 import React from 'react';
+
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
 	const navigate = useNavigate();
+
 	return (
 		<main className=' container mx-auto w-full min-h-full flex flex-col items-center justify-between gap-4 py-5 bg-slate-50 px-9 sm:px-5'>
 			<section className='w-full h-[40vh] bg-gray-300 bg-hero bg-cover bg-center rounded-md'></section>

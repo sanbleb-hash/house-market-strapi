@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-
+import cookie from 'cookie';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
@@ -69,7 +69,6 @@ const Login = () => {
 					dispatch({ type: 'LOGIN_USER', payload: data });
 
 					localStorage.setItem('user', JSON.stringify(data));
-					console.log(data);
 				}
 				setFormData({
 					username: '',

@@ -66,6 +66,14 @@
     "slug": {
       "type": "uid",
       "targetField": "name"
+    },
+    "price": {
+      "type": "decimal",
+      "default": 0
+    },
+    "offer": {
+      "type": "decimal",
+      "default": 0
     }
   }
 }

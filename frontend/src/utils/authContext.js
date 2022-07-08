@@ -3,7 +3,9 @@ import { createContext, useReducer } from 'react';
 export const AuthContext = createContext();
 
 const INITIAl_STATE = {
-	user: null,
+	user: localStorage.getItem('user')
+		? JSON.parse(localStorage.getItem('user'))
+		: null,
 	isLoading: false,
 	isError: false,
 	error: null,

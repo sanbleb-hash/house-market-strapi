@@ -1,12 +1,13 @@
-import axios from 'axios';
-import cookie from 'js-cookie';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { FaArrowLeft } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../utils/authContext';
 
 const Create = () => {
 	const { state } = useContext(AuthContext);
 	const { user } = state;
 
+	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
 		name: '',
 		description: '',
@@ -14,6 +15,7 @@ const Create = () => {
 		type: '',
 		parking: '',
 		bedrooms: '',
+
 		location: '',
 		bathrooms: '',
 		offer: '',
@@ -27,20 +29,34 @@ const Create = () => {
 
 		const token = user.jwt;
 		const data = await fetch(
-			'http://localhost:1337/api/listings',
+			'/api/listings',
 
 			{
 				method: 'POST',
 				mode: 'cors',
 				headers: {
 					'Content-Type': 'application/json',
-					Authorization: 'Token ' + token,
+					Authorization: `Bearer ${token}`,
 				},
 				body: JSON.stringify({ data: formData }),
 			}
 		);
-		console.log(data);
-		return data;
+		const response = await data.json();
+		setFormData({
+			name: '',
+			description: '',
+			price: '',
+			type: '',
+			parking: '',
+			bedrooms: '',
+			location: '',
+			bathrooms: '',
+			offer: '',
+		});
+		if (response) {
+			navigate('/');
+		}
+		return response;
 	};
 
 	const {
@@ -55,15 +71,24 @@ const Create = () => {
 		offer,
 	} = formData;
 
+	useEffect(() => {
+		console.log(user.jwt);
+	}, [user]);
+
 	return (
 		<section className='p-8 min-h-[70vh]'>
 			<h1 className='pl-5 text-gray-500 capitalize '>create your listing</h1>
-			<div className=' w-3/4 h-full mx-auto flex items-center justify-center'>
+			<Link className='pl-7 text-gray-500' to={-1}>
+				<button type='button' className=' hover:text-gray-500 hover:scale-105'>
+					<FaArrowLeft style={{ paddingRight: 4, display: 'inline' }} /> go back
+				</button>
+			</Link>
+			<div className=' w-3/4 h-full mx-auto flex  items-center justify-center'>
 				<form
 					onSubmit={handleSubmit}
 					className='flex  pt-20 items-start flex-col min-h-[50vh] gap-5'
 				>
-					<div className='flex items-center justify-between flex-col md:flex-row gap-5'>
+					<div className='flex items-center justify-between flex-col lg:flex-row gap-5'>
 						<input
 							type='text'
 							className='shadow appearance-none border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
@@ -97,7 +122,7 @@ const Create = () => {
 							placeholder='bathrooms'
 						/>
 					</div>
-					<div className='flex items-center justify-between flex-col md:flex-row gap-5'>
+					<div className='flex items-center justify-between flex-col lg:flex-row gap-5'>
 						<input
 							type='number'
 							className='shadow appearance-none border rounded w-full  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
@@ -107,7 +132,7 @@ const Create = () => {
 							placeholder='price'
 						/>
 						<input
-							type='text'
+							type='number'
 							className='shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 							onChange={handleChange}
 							name='offer'
@@ -130,8 +155,8 @@ const Create = () => {
 							value={parking}
 							placeholder='parking'
 						>
-							<option>parking</option>
 							<option>no parking</option>
+							<option>parking spot</option>
 						</select>
 					</div>
 					<div className='flex w-full items-end justify-between '>
@@ -145,7 +170,7 @@ const Create = () => {
 						/>
 						{formData && (
 							<button
-								className='bg-green-300 px-5 rounded-lg py-2 text-gray-400'
+								className='bg-green-300 px-5 rounded-lg ml-7 py-2 text-gray-400'
 								type='submit'
 								onSubmit={handleSubmit}
 							>
