@@ -24,13 +24,13 @@ const Listing = () => {
 	}, [listingId]);
 
 	return (
-		<div className='w-full min-h-[90vh] bg-slate-100 pt-20 pb-10'>
+		<div className='w-screen min-h-[90vh] bg-slate-100 pt-20 pb-10'>
 			{isLoading ? (
 				<div className='flex justify-center items-center  animate-spin h-screen'>
 					<RiLoader5Line className='text-5xl text-blue-300' />.
 				</div>
 			) : (
-				<div className='container mx-auto h-[60vh] px-16 bg-slate-100'>
+				<div className='container mx-auto min-h-[70vh] w-full px-16 bg-slate-100'>
 					<h1 className=' pt-6 text-gray-600'>{listing.name}</h1>
 					<h3 className=' text-gray-600'> for {listing.type}</h3>
 					<Link to={-1}>
@@ -42,42 +42,37 @@ const Listing = () => {
 							back
 						</button>
 					</Link>
-					<div className='  flex items-start justify-between gap-3 p-4 '>
-						<img
-							src='https://cdn.pixabay.com/photo/2022/01/29/17/12/chateau-6978102__340.jpg'
-							alt=''
-							className=' w-1/2 h-[50vh] shadow-md  '
-						/>
-						<div className='w-1/2 min-h-[50vh] shadow-md p-2 rounded-lg bg-slate-200'>
+					<div className='flex w-full md:h-[40vh] flex-col md:flex-row items-center justify-between '>
+						<div className=' md:h-full  h-3/2 md:w-1/2'>
+							<img
+								src='https://cdn.pixabay.com/photo/2022/01/29/17/12/chateau-6978102__340.jpg'
+								alt=''
+								className=' w-full h-full shadow-md object-cover'
+							/>
+						</div>
+						<div className=' rounded-lg bg-slate-200 min-h-full md:mt-16 w-full p-3 md:w-1/2  '>
 							<div className='flex justify-between flex-wrap gap-3'>
-								<span>
-									<p className='text-gray-600'>
-										price : {listing.price}
-										{listing.type === 'rent' && 'monthly'}
-									</p>
+								<span className='text-gray-600'>
+									price : R{listing.price}
+									{listing.type === 'rent' && '  /monthly'}
 								</span>
 
-								<span>
-									<p className='text-gray-600'>
-										{listing.bathrooms}{' '}
-										{listing.bathrooms <= 1 ? 'bathroom' : 'bathrooms'}
-									</p>
+								<span className='text-gray-600'>
+									{listing.bathrooms}{' '}
+									{listing.bathrooms <= 1 ? 'bathroom' : 'bathrooms'}
 								</span>
-								<span>
-									<p className='text-gray-600'>
-										{listing.bedrooms}{' '}
-										{listing.bedrooms <= 1 ? 'bedroom' : 'bedrooms'}
-									</p>
+								<span className='text-gray-600'>
+									{listing.bedrooms}{' '}
+									{listing.bedrooms <= 1 ? 'bedroom' : 'bedrooms'}
 								</span>
-								<span>
-									<p className='text-gray-600'>
-										located at :{listing.location}
-									</p>
+								<span className='text-gray-600'>
+									located in {listing.location}
 								</span>
 
-								<p className='text-gray-600'>{listing.parking}</p>
+								<span className='text-gray-600'>{listing.parking}</span>
 							</div>
-							<h2 className='text-gray-600'>Description</h2>
+							<br />
+							<h5 className='text-gray-700 text-2xl '>Description</h5>
 							<p className='text-gray-600'>{listing.description}</p>
 						</div>
 					</div>

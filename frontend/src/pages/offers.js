@@ -51,27 +51,42 @@ const Offers = () => {
 							listings.map((listing) => {
 								return (
 									<div
-										className='w-[300px] md:w-[450px] lg:w-[350px] md:h-[150px] h-[250px] bg-slate-200 shadow-lg mx-auto shadow-white flex   items-start overflow-hidden rounded-lg  '
+										className='w-[300px] md:w-[450px] lg:w-[350px] md:h-[150px] h-[250px] bg-slate-200 shadow-lg  shadow-white flex   items-start 
+                              mx-auto 
+                              justify-center overflow-hidden rounded-lg  '
 										key={listing.attributes.id}
 									>
-										<div className='w-1/2 h-full bg-rent'></div>
-										<div className='w-1/2 h-[150px] my-auto bg-yellow-100 flex flex-col items-center justify-between px-3 mb-6 '>
-											<h2 className=' text-gray-500 text-xl '>
-												{listing.attributes.name}
-											</h2>
-											<span className=' text-gray-400 text-sm'>
-												{' '}
-												{listing.attributes.bedrooms}{' '}
-												{listing.attributes.bedrooms === 1
-													? 'bedroom'
-													: 'bedrooms'}{' '}
+										<div className='w-1/2 h-full relative bg-rent'>
+											<span className=' absolute bottom-1 left-2 bg-black/40 text-white py-2 px-5'>
+												save: R
+												{listing.attributes.price - listing.attributes.discount}
 											</span>
-											<span className=' text-gray-400 text-sm'>
-												{listing.attributes.parking}
+										</div>
+										<div className='w-1/2 h-full my-auto bg-yellow-100 flex flex-col items-center justify-center   p-3  '>
+											<h1 className='text-lg text-gray-500 self-start first-letter:capitalize '>
+												{listing.attributes.name.substring(0, 15)}
+											</h1>
+											<span className='inline-block text-gray-400 leading-4 pb-2'>
+												<h5 className='text-xs self-start first-letter:capitalize '>
+													{listing.attributes.parking}
+												</h5>
+												<h5 className='text-xs self-start first-letter:capitalize '>
+													{listing.attributes.bathrooms}
+													{listing.attributes.bathrooms === 1
+														? ' bathroom'
+														: ' bathrooms'}
+												</h5>
+												<h5 className='text-xs self-start first-letter:capitalize '>
+													{listing.attributes.bedrooms}
+													{listing.attributes.bathrooms === 1
+														? ' bathroom'
+														: ' bathrooms'}
+												</h5>
 											</span>
 											<button
 												type='button'
-												className=' text-gray-600 border border-gray-600 hover:bg-yellow-200 rounded-md
+												className=' text-gray-600 border border-gray-300 hover:bg-yellow-200 rounded-md w-full
+                                    text-sm py-1
                                     mb-2
                                     shadow-lg transition-all duration-200  ease-in-out'
 												onClick={() => navigate(`/listing/${listing.id}`)}
