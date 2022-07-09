@@ -28,7 +28,7 @@
     "bathrooms": {
       "type": "integer"
     },
-    "location": {
+    "address": {
       "type": "string",
       "required": true
     },

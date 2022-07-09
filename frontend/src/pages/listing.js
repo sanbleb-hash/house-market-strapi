@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { RiLoader5Line } from 'react-icons/ri';
 import { FaArrowLeft } from 'react-icons/fa';
+import ListingMap from '../components/listingMap';
 
 const Listing = () => {
 	const location = useLocation();
@@ -53,7 +54,14 @@ const Listing = () => {
 						<div className=' rounded-lg bg-slate-200 min-h-full md:mt-16 w-full p-3 md:w-1/2  '>
 							<div className='flex justify-between flex-wrap gap-3'>
 								<span className='text-gray-600'>
-									price : R{listing.price}
+									price {listing.discount ? 'now at' : ''} : R
+									{listing.discount
+										? listing.price?.toFixed(2) - listing.discount?.toFixed(2)
+										: listing.price?.toFixed(2)}{' '}
+									{listing.discount && 'save R'}
+									<span className=' text-green-600 underline'>
+										{listing.discount?.toFixed(2)}
+									</span>
 									{listing.type === 'rent' && '  /monthly'}
 								</span>
 
@@ -66,7 +74,7 @@ const Listing = () => {
 									{listing.bedrooms <= 1 ? 'bedroom' : 'bedrooms'}
 								</span>
 								<span className='text-gray-600'>
-									located in {listing.location}
+									located in {listing.address}
 								</span>
 
 								<span className='text-gray-600'>{listing.parking}</span>
@@ -78,6 +86,9 @@ const Listing = () => {
 					</div>
 				</div>
 			)}
+			<div className=' container mx-auto h-50vh '>
+				<ListingMap map={listing} />
+			</div>
 		</div>
 	);
 };

@@ -58,8 +58,7 @@ const Offers = () => {
 									>
 										<div className='w-1/2 h-full relative bg-rent'>
 											<span className=' absolute bottom-1 left-2 bg-black/40 text-white py-2 px-5'>
-												save: R
-												{listing.attributes.price - listing.attributes.discount}
+												save: R{listing.attributes.discount}
 											</span>
 										</div>
 										<div className='w-1/2 h-full my-auto bg-yellow-100 flex flex-col items-center justify-center   p-3  '>

@@ -5,6 +5,7 @@ import { AuthContext } from '../utils/authContext';
 
 const Profile = () => {
 	const [edit, setEdit] = useState(false);
+	const [username, setUsername] = useState('');
 	const { state } = useContext(AuthContext);
 	const { user } = state;
 
@@ -13,6 +14,22 @@ const Profile = () => {
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user]);
+
+	const handleEdit = async () => {
+		const data = await fetch(
+			'/api/users/edit',
+			{ username },
+			{
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${user.jwt}`,
+				},
+			}
+		);
+		const json = await data.json();
+		console.log(json);
+	};
 	return (
 		<div className='container mx-auto w-full px-6 bg-inherit py-14 '>
 			<h1 className=' text-gray-600  capitalize text-2xl md:text-5xl  py-6'>
@@ -29,7 +46,8 @@ const Profile = () => {
 					<input
 						type='text'
 						disabled={!edit}
-						value={user.user.username}
+						value={username || user.user.username}
+						onChange={(e) => setUsername(e.target.value)}
 						className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 						id='username'
 						placeholder='Username'
@@ -55,7 +73,7 @@ const Profile = () => {
 					{edit && (
 						<button
 							className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-							onClick={() => setEdit(true)}
+							onClick={handleEdit}
 						>
 							edit your credentials
 						</button>
@@ -70,10 +88,7 @@ const Profile = () => {
 				>
 					click to edit your credentials
 				</button>
-				<button
-					className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full'
-					onClick={() => setEdit(true)}
-				>
+				<button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full'>
 					<Link to='/create'>create new listing</Link>
 				</button>
 				<button

@@ -1,11 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
+import { RiLoader5Line } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../utils/authContext';
 
 const Create = () => {
 	const { state } = useContext(AuthContext);
 	const { user } = state;
+	const [isLoading, setIsLoading] = useState(false);
 
 	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
@@ -16,7 +20,7 @@ const Create = () => {
 		parking: 'no parking',
 		bedrooms: '',
 
-		location: '',
+		address: '',
 		bathrooms: '',
 		discount: '',
 	});
@@ -26,8 +30,30 @@ const Create = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		let location;
+		const res = await fetch(
+			`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GOOGLE_MAP_TOKEN}`
+		);
+		const dataAddress = await res.json();
+
+		console.log(dataAddress);
+
+		// if (dataAddress.results.length > 0) {
+		// 	location = dataAddress.results[0].geometry.location;
+		// 	console.log(location);
+		// }
+
+		if (name === '' || description === '' || price === '' || address === '') {
+			toast.error('Please fill in all fields');
+			return;
+		}
+		if (discount > price) {
+			toast.error('Discount cannot be greater than price');
+			return;
+		}
 
 		const token = user.jwt;
+		setIsLoading(true);
 		const data = await fetch(
 			'/api/listings',
 
@@ -38,10 +64,11 @@ const Create = () => {
 					'Content-Type': 'application/json',
 					Authorization: `Bearer ${token}`,
 				},
-				body: JSON.stringify({ data: formData }),
+				body: JSON.stringify({ data: formData, location }),
 			}
 		);
 		const response = await data.json();
+
 		setFormData({
 			name: '',
 			description: '',
@@ -49,13 +76,16 @@ const Create = () => {
 			type: 'sale',
 			parking: 'no parking',
 			bedrooms: '',
-			location: '',
+			address: '',
 			bathrooms: '',
 			discount: '',
 		});
-		if (response) {
+		setTimeout(() => {
+			setIsLoading(true);
 			navigate('/');
-		}
+		}, 3000);
+
+		toast.success('Listing created successfully');
 		return response;
 	};
 
@@ -65,18 +95,24 @@ const Create = () => {
 		price,
 		type,
 		parking,
-		location,
+		address,
 		bathrooms,
 		bedrooms,
 		discount,
 	} = formData;
 
 	useEffect(() => {
-		console.log(user.jwt);
-	}, [user]);
+		document.title = 'Create Listing';
+	}, []);
 
 	return (
 		<section className='p-8 pt-20 min-h-[70vh]'>
+			{isLoading && (
+				<div className='flex justify-center items-center  animate-spin h-screen w-screen'>
+					<RiLoader5Line className='text-5xl text-blue-300' />
+				</div>
+			)}
+
 			<h1 className='pl-5 text-gray-500 capitalize '>create your listing</h1>
 			<Link className='pl-7 text-gray-500' to={-1}>
 				<button type='button' className=' hover:text-gray-500 hover:scale-105'>
@@ -101,9 +137,9 @@ const Create = () => {
 							type='text'
 							className='shadow appearance-none border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 							onChange={handleChange}
-							name='location'
-							value={location}
-							placeholder='location'
+							name='address'
+							value={address}
+							placeholder='address'
 						/>
 						<input
 							type='number'
