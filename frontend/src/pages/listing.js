@@ -14,7 +14,7 @@ const Listing = () => {
 		setIsLoading(true);
 		const fetchListing = async () => {
 			const response = await fetch(
-				`http://localhost:1337/api/listings/${listingId}`
+				`http://localhost:1337/api/listings/${listingId}?pagination[page]=1&pagination[perPage]=3`
 			);
 			const { data } = await response.json();
 			setIsLoading(false);

@@ -15,14 +15,14 @@ const Create = () => {
 	const [formData, setFormData] = useState({
 		name: '',
 		description: '',
-		price: '',
+		price: 0,
 		type: 'sale',
 		parking: 'no parking',
-		bedrooms: '',
-
+		bedrooms: 1,
+		fotos: [''],
 		address: '',
-		bathrooms: '',
-		discount: '',
+		bathrooms: 1,
+		discount: 0,
 	});
 	const handleChange = (e) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -68,17 +68,23 @@ const Create = () => {
 			}
 		);
 		const response = await data.json();
+		console.log(response);
+		if (!response.status === 201 || response.status === 200) {
+			toast.error(response.error);
+			return;
+		}
 
 		setFormData({
 			name: '',
 			description: '',
-			price: '',
+			price: 0,
 			type: 'sale',
 			parking: 'no parking',
 			bedrooms: '',
-			address: '',
-			bathrooms: '',
-			discount: '',
+			address: 1,
+			bathrooms: 1,
+			discount: 0,
+			fotos: [''],
 		});
 		setTimeout(() => {
 			setIsLoading(true);
@@ -97,6 +103,7 @@ const Create = () => {
 		parking,
 		address,
 		bathrooms,
+		fotos,
 		bedrooms,
 		discount,
 	} = formData;
@@ -158,6 +165,16 @@ const Create = () => {
 							placeholder='bathrooms'
 						/>
 					</div>
+					<input
+						type='file'
+						className='shadow appearance-none border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+						onChange={(e) =>
+							setFormData({ ...formData, fotos: e.target.fotos })
+						}
+						value={fotos}
+						name='fotos'
+						placeholder='fotos'
+					/>
 					<div className='flex items-center justify-between flex-col lg:flex-row gap-5'>
 						<input
 							type='number'

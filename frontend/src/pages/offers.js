@@ -2,17 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 import { RiLoader5Line } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
+import Pagination from '../components/pagination';
 
 const Offers = () => {
 	const navigate = useNavigate();
 
 	const [listings, setListings] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const [pageIndex, setPageIndex] = useState(1);
+	const page = 6;
 
 	const fetchType = async () => {
 		setIsLoading(true);
 		const listings = await fetch(
-			`http://localhost:1337/api/listings?filters[discount][$gte]=1`
+			`http://localhost:1337/api/listings?filters[discount][$gte]=1&pagination[page]=${Number(
+				pageIndex
+			)}&pagination[pageSize]=${page}`
 		);
 		const { data } = await listings.json();
 		setIsLoading(false);
@@ -37,15 +42,24 @@ const Offers = () => {
 					>
 						Offers
 					</h1>
-					<Link to={-1}>
-						<button
-							type='button'
-							className=' hover:text-gray-500 hover:scale-105'
-						>
-							<FaArrowLeft style={{ paddingRight: 4, display: 'inline' }} /> go
-							back
-						</button>
-					</Link>
+					<div className=' container  flex items-center justify-between  gap-3 overflow-hidden px-12 mx-auto p-5'>
+						<Link to={-1}>
+							<button
+								type='button'
+								className=' hover:text-gray-500 hover:scale-105'
+							>
+								<FaArrowLeft style={{ paddingRight: 4, display: 'inline' }} />{' '}
+								go back
+							</button>
+						</Link>
+						{!listings.length <= page && (
+							<Pagination
+								pageIndex={pageIndex}
+								setPageIndex={setPageIndex}
+								allListings={listings.length}
+							/>
+						)}
+					</div>
 					<div className=' container sm:w-[70vw] flex items-start justify-start bg-gray-300 min-h-[70vh]   flex-wrap gap-3 overflow-hidden px-12 mx-auto p-5'>
 						{listings &&
 							listings.map((listing) => {

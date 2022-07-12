@@ -1,17 +1,27 @@
 import React, { useEffect, useState } from 'react';
+
 import { FaArrowLeft } from 'react-icons/fa';
 import { RiLoader5Line } from 'react-icons/ri';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import Pagination from '../components/pagination';
 
 const Type = () => {
 	const navigate = useNavigate();
 
 	const [listings, setListings] = useState([]);
+	const [pageIndex, setPageIndex] = useState(1);
 	const [isLoading, setIsLoading] = useState(true);
 	const { typeId } = useParams();
+	const page = 6;
+
 	const fetchType = async () => {
 		setIsLoading(true);
-		const listings = await fetch(`/api/listings?filters[type][$eq]=${typeId}`);
+
+		const listings = await fetch(
+			`/api/listings?filters[type][$eq]=${typeId}&pagination[page]=${Number(
+				pageIndex
+			)}&pagination[pageSize]=${page}`
+		);
 		const { data } = await listings.json();
 		setIsLoading(false);
 		setListings(data);
@@ -19,7 +29,7 @@ const Type = () => {
 	useEffect(() => {
 		fetchType();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [pageIndex]);
 
 	return (
 		<>
@@ -91,6 +101,14 @@ const Type = () => {
 								);
 							})}
 					</div>
+
+					{!listings.length <= page && (
+						<Pagination
+							pageIndex={pageIndex}
+							setPageIndex={setPageIndex}
+							allListings={listings.length}
+						/>
+					)}
 				</main>
 			)}
 		</>
