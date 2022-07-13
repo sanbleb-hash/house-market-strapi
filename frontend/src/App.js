@@ -11,6 +11,7 @@ import { ToastContainer } from 'react-toastify';
 import Login from './pages/login';
 import Create from './pages/create';
 import Header from './components/header';
+import Search from './pages/search';
 
 const App = () => {
 	return (
@@ -29,6 +30,7 @@ const App = () => {
 					<Route path='/login' element={<Login />} />
 					<Route path='/type/:typeId' element={<Type />} />
 					<Route path='/listing/:listingId' element={<Listing />} />
+					<Route path='/search' element={<Search />} />
 				</Routes>
 				<ToastContainer />
 			</main>

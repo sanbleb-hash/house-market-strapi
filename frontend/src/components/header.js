@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaBars } from 'react-icons/fa';
+import SearchBar from './searchBar';
 
 const Header = () => {
 	return (
@@ -8,6 +9,7 @@ const Header = () => {
 				<h1 className=' text-2xl md:text-4xl text-gray-700 pt-5 '>
 					house market place
 				</h1>
+				<SearchBar />
 			</div>
 		</header>
 	);

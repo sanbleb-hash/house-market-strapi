@@ -1,12 +1,8 @@
 import { createContext, useReducer } from 'react';
 
-export const Store = createContext();
+export const searchContext = createContext();
 
 const INITIAl_STATE = {
-	user: localStorage.getItem('user')
-		? JSON.parse(localStorage.getItem('user'))
-		: null,
-
 	listings: localStorage.getItem('listings')
 		? JSON.parse(localStorage.getItem('listings'))
 		: [],
@@ -22,22 +18,8 @@ const reducer = (state, action) => {
 				isLoading: true,
 				error: null,
 			};
-		case 'LOGIN_USER':
-			return {
-				...state,
 
-				user: action.payload,
-				isLoading: false,
-				error: null,
-			};
-		case 'LOGOUT_USER':
-			return {
-				...state,
-				user: localStorage.removeItem('user') || null,
-				isLoading: false,
-				isError: false,
-			};
-		case 'SET_LISTINGS':
+		case 'SEARCH_SUCCESS':
 			return {
 				...state,
 				listings: action.payload,
@@ -56,9 +38,11 @@ const reducer = (state, action) => {
 	}
 };
 
-export function StoreProvider({ children }) {
+export function SearchProvider({ children }) {
 	const [state, dispatch] = useReducer(reducer, INITIAl_STATE);
 	return (
-		<Store.Provider value={{ state, dispatch }}>{children}</Store.Provider>
+		<searchContext.Provider value={{ state, dispatch }}>
+			{children}
+		</searchContext.Provider>
 	);
 }
