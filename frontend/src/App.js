@@ -28,9 +28,9 @@ const App = () => {
 						<Route path='/create' element={<Create />} />
 					</Route>
 					<Route path='/login' element={<Login />} />
+					<Route path='/listings-search' element={<Search />} />
 					<Route path='/type/:typeId' element={<Type />} />
 					<Route path='/listing/:listingId' element={<Listing />} />
-					<Route path='/search' element={<Search />} />
 				</Routes>
 				<ToastContainer />
 			</main>

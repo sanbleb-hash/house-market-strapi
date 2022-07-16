@@ -15,9 +15,9 @@ const SearchBar = () => {
 			dispatch({ type: 'INITIAL_LOAD' });
 
 			const response = await fetch(
-				`/api/listings?filters[name][$eq]=${searchText.toLowerCase()}`
+				`/api/listings?filters[name][$eq]=${searchText}`
 			);
-			const { data } = await response.json();
+			const data = await response.json();
 			dispatch({
 				type: 'SEARCH_SUCCESS',
 
@@ -26,7 +26,7 @@ const SearchBar = () => {
 			localStorage.setItem('listings', JSON.stringify(data));
 
 			if (data.length >= 1) {
-				navigate('/search');
+				navigate('/listings-search');
 			}
 		} catch (error) {
 			if (error) {
